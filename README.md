@@ -14,6 +14,10 @@ el ordenador, la tablet o el móvil, y se actualizan solas si cambias algo en ot
 ## Cómo está montada
 - **Supabase**: proyecto `buscapelis` (región West EU). La tabla y los permisos están en
   [`supabase/esquema.sql`](supabase/esquema.sql); se puede volver a ejecutar en el **SQL Editor** sin perder nada.
+  Es el proyecto «compartido» (`gwmhpxeldnsyuecwldkb`): también guarda los datos de
+  [Árbol Genealógico](https://github.com/Thenend/arbol-genealogico), con las mismas cuentas. Las tablas del árbol
+  (`arboles`, `miembros`, `invitaciones`, `solicitudes` y `arbol_perfiles`) están en el `supabase/esquema.sql` de ese
+  repositorio; no hay que tocarlas desde aquí.
   En **Authentication → URL Configuration**, la **Site URL** y las **Redirect URLs** son la dirección de la web, y en
   **Sign In / Providers → Email**, «Confirm email» está desactivado para entrar al momento al crear la cuenta.
 - **GitHub Pages**: en **Settings → Pages → Source**, «GitHub Actions». Cada vez que cambia la rama `main`, la acción

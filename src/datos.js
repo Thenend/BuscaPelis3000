@@ -5,7 +5,7 @@
 // solo en este navegador.
 import { createClient } from '@supabase/supabase-js';
 
-// El proyecto «buscapelis» de Supabase. La clave publicable puede estar en la página: sin una cuenta no da acceso a nada
+// El proyecto «compartido» de Supabase (antes «buscapelis»; también guarda los datos de Árbol Genealógico). La clave publicable puede estar en la página: sin una cuenta no da acceso a nada
 // (los permisos de supabase/esquema.sql deciden quién ve qué). Las variables del repositorio, si existen, mandan.
 const PROYECTO_URL = 'https://gwmhpxeldnsyuecwldkb.supabase.co';
 const PROYECTO_CLAVE = 'sb_publishable_IKMoy9dA4Q-6S9gn0Goxiw_dEYN6aRV';
