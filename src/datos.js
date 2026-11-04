@@ -46,16 +46,6 @@ export const entrar = async (email, contrasena) => {
     if (error) throw error;
 };
 
-// El nombre de usuario se guarda al crear la cuenta (función «nombre_al_registrarse» de supabase/esquema.sql).
-export const registrarse = async (email, contrasena, nombre) => {
-    const { data, error } = await supabase.auth.signUp({
-        email, password: contrasena,
-        options: { emailRedirectTo: window.location.origin + window.location.pathname, data: { nombre } },
-    });
-    if (error) throw error;
-    return { necesitaConfirmar: !data.session };
-};
-
 export const recuperarContrasena = async (email) => {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: window.location.origin + window.location.pathname,
@@ -78,12 +68,6 @@ export const AVISO_NOMBRE = 'El nombre debe tener de 3 a 20 letras, números, pu
 export const miNombre = async () => {
     if (modoPrueba) return USUARIO_PRUEBA.email;
     const { data, error } = await supabase.rpc('mi_nombre');
-    if (error) throw error;
-    return data;
-};
-
-export const nombreLibre = async (nombre) => {
-    const { data, error } = await supabase.rpc('nombre_libre', { p_nombre: nombre });
     if (error) throw error;
     return data;
 };

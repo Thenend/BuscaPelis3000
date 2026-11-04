@@ -14,8 +14,10 @@ el ordenador, la tablet o el móvil, y se actualizan solas si cambias algo en ot
 ## Cómo está montada
 - **Supabase**: proyecto `buscapelis` (región West EU). La tabla y los permisos están en
   [`supabase/esquema.sql`](supabase/esquema.sql); se puede volver a ejecutar en el **SQL Editor** sin perder nada.
-  En **Authentication → URL Configuration**, la **Site URL** y las **Redirect URLs** son la dirección de la web, y en
-  **Sign In / Providers → Email**, «Confirm email» está desactivado para entrar al momento al crear la cuenta.
+  En **Authentication → URL Configuration**, la **Site URL** y las **Redirect URLs** son la dirección de la web. En
+  **Authentication → Sign In / Providers**, «Allow new users to sign up» está desactivado: nadie puede crearse una cuenta
+  desde la web, así que solo entran los amigos a los que se la creas a mano (ver [Dar de alta a un amigo](#dar-de-alta-a-un-amigo)).
+  Así nadie más gasta las consultas de la clave de OMDb.
 - **GitHub Pages**: en **Settings → Pages → Source**, «GitHub Actions». Cada vez que cambia la rama `main`, la acción
   **Web** (pestaña **Actions**) publica la web en un par de minutos (también a mano: **Actions → Web → Run workflow**).
 - **Notas de IMDb, Rotten Tomatoes y Metacritic**: la web las pide a la función `omdb` de Supabase
@@ -28,10 +30,15 @@ el ordenador, la tablet o el móvil, y se actualizan solas si cambias algo en ot
   de `src/datos.js`. La clave **service_role** no se usa: no la copies en ningún sitio.
 
 ## Primeros pasos
-### 1. Crear la cuenta
-Abre la web, pulsa **Crear cuenta** y escribe tu nombre de usuario, tu correo y una contraseña. El nombre de usuario es lo
-que ven los demás en vez de tu correo; se cambia pulsando en él (arriba a la derecha). Las cuentas creadas antes lo
-eligen la próxima vez que entran.
+### 1. Entrar
+Abre la web y entra con el correo y la contraseña que te han dado. La primera vez te pide un nombre de usuario: es lo que
+ven los demás en vez de tu correo, y se cambia pulsando en él (arriba a la derecha). Cambia también la contraseña
+provisional con el botón **Contraseña**. Si la olvidas, pulsa **He olvidado la contraseña** y te llega un enlace al correo.
+
+#### Dar de alta a un amigo
+En Supabase, ve a **Authentication → Users → Add user → Create new user**, escribe su correo y una contraseña provisional,
+marca **«Auto Confirm User»** y pulsa **Create user**. Pásale la dirección de la web, su correo y esa contraseña. Para
+quitarle el acceso, borra su usuario en la misma lista (se borran también sus listas).
 
 ### 2. Traer tus datos de Gemini Canvas
 1. En la aplicación de Gemini Canvas, pulsa **💾 Guardar Backup** (abajo del todo): descarga un archivo `.json`.
@@ -63,7 +70,7 @@ npm run build
 ```
 - `src/App.jsx`: la aplicación (la misma de Gemini Canvas, guardando en Supabase en vez de Firestore).
 - `src/datos.js`: cuentas y guardado (Supabase, o el navegador en modo de prueba).
-- `src/Entrada.jsx`, `src/ElegirNombre.jsx`, `src/BarraCuenta.jsx`: entrar, crear cuenta, nombre de usuario,
+- `src/Entrada.jsx`, `src/ElegirNombre.jsx`, `src/BarraCuenta.jsx`: entrar, recuperar la contraseña, nombre de usuario,
   contraseña, clave de IA y salir.
 - `src/componentes/`: las tarjetas, el selector de rangos y las ventanas (temporadas, ficha de OMDb, plataformas).
 - `src/notas.js`: notas de OMDb ya consultadas, guardadas en el navegador.
